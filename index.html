@@ -29,87 +29,81 @@
 		</ol>
 		<script>
 			// define ordem
-			let crescente = true
+			let crescente = true;
 
 			// ordena lista de acordo com a ordem dinâmica
 			const ordenaListaDinamica = (lista) => {
 				// ordena lista comparando strings
-				lista.sort((a, b) => a.localeCompare(b))
+				lista.sort((a, b) => a.localeCompare(b));
 				// verifica se a ordem é decrescente
 				if (!crescente) {
-					lista.reverse()
+					lista.reverse();
 				}
 				// muda ordem para próxima ordenação
-				crescente = !crescente
-			}
+				crescente = !crescente;
+			};
 
 			// retorna referencia da lista
-			const getLista = () => document.querySelector("#lista_itens")
+			const getLista = () => document.querySelector("#lista_itens");
 
 			// escreve e retorna um elemento <li></li>
-			const criaItem = (novoItem) => `<li>${novoItem}</li>`
+			const criaItem = (novoItem) => `<li>${novoItem}</li>`;
 
 			// insere novo item na lista
 			const insereNovoItem = () => {
 				// pega input novo_item
-				const input = document.querySelector(`[name="novo_item"]`)
+				const input = document.querySelector(`[name="novo_item"]`);
 				// verifica valor de input
 				if (input.value) {
 					// insere novo item na lista
-					getLista().innerHTML += criaItem(input.value)
+					getLista().innerHTML += criaItem(input.value);
 					// reseta valor de input
-					input.value = ""
+					input.value = "";
 				}
 				// define ordem crescente
-				crescente = true
-			}
+				crescente = true;
+			};
 
 			// remove item pelo número
 			const removeItem = () => {
 				// pega input remover_item
-				const input = document.querySelector(`[name="remover_item"]`)
+				const input = document.querySelector(`[name="remover_item"]`);
 				// verifica valor de input
 				if (input.value) {
 					// pega valor de input
-					const itemRemovido = input.value - 1
+					const itemRemovido = input.value - 1;
 					// pega lista
-					const lista = document.querySelector("#lista_itens")
+					const lista = document.querySelector("#lista_itens");
 					// extrai do objeto lista a collection de elementos filhos e o seu tamanho
-					const { childElementCount: qtdItens, children: itens } = lista
+					const { childElementCount: qtdItens, children: itens } = lista;
 					// verifica se itemRemovido é válido
 					if (itemRemovido >= 0 && itemRemovido < qtdItens) {
 						// remove da lista o elemento filho que está na collection itens na posição de itemRemovido
 						// ---> itens[itemRemovido]
-						lista.removeChild(itens[itemRemovido])
+						lista.removeChild(itens[itemRemovido]);
 					}
-
 					// reseta valor de input
-					input.value = ""
+					input.value = "";
 				}
-			}
+			};
 
 			// ordena itens da lista
 			const ordenaLista = () => {
 				// obtém HTMLcollection de filhos da lista e salva apenas o texto HTML em um array
 				// ---> desestrutura HTMLcollection e mapeada cada item, retorna apenas o outerHTML
 				const listaItens = [...getLista().children].map(
-					(item) => item.outerHTML
-				)
-
+					(item) => item.outerHTML,
+				);
 				// ordena lista de forma dinâmica
-				ordenaListaDinamica(listaItens)
-
-				console.log(getLista().childNodes[1])
-
+				ordenaListaDinamica(listaItens);
 				// reseta elemento lista
-				getLista().innerHTML = ""
-
+				getLista().innerHTML = "";
 				// mapea lista de itens e adiciona cada item como elemento filho dentro lista
 				listaItens.map((item) => {
 					// insere item dentro da lista
-					getLista().innerHTML += item
-				})
-			}
+					getLista().innerHTML += item;
+				});
+			};
 		</script>
 	</body>
 </html>
